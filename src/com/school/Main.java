@@ -8,7 +8,6 @@ public class Main {
         Lecture lecture2 = new Lecture("Віднімання");
         Lecture lecture3 = new Lecture("Ділення");
         Lecture lecture4 = new Lecture("Множення");
-        Lecture lecture5 = new Lecture("Відсотки");
 
         System.out.println(Lecture.count);
     }
