@@ -1,10 +1,10 @@
 package com.school.models;
 
-public class Students {
+public class Teacher {
     private int id;
     public static int count;
 
-    public Students() {
+    public Teacher() {
         count++;
         id = count;
     }

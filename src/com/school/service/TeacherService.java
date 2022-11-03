@@ -1,4 +1,4 @@
 package com.school.service;
 
-public class TeachersService {
+public class TeacherService {
 }

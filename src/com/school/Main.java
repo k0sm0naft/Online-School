@@ -4,12 +4,12 @@ import com.school.models.*;
 
 public class Main {
     public static void main(String[] args) {
-        Lectures Lecture1 = new Lectures("Додавання");
-        Lectures Lecture2 = new Lectures("Віднімання");
-        Lectures Lecture3 = new Lectures("Ділення");
-        Lectures Lecture4 = new Lectures("Множення");
-        Lectures Lecture5 = new Lectures("Відсотки");
+        Lecture lecture1 = new Lecture("Додавання");
+        Lecture lecture2 = new Lecture("Віднімання");
+        Lecture lecture3 = new Lecture("Ділення");
+        Lecture lecture4 = new Lecture("Множення");
+        Lecture lecture5 = new Lecture("Відсотки");
 
-        System.out.println(Lectures.count);
+        System.out.println(Lecture.count);
     }
 }

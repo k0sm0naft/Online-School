@@ -1,10 +1,10 @@
 package com.school.models;
 
-public class AdditionalMaterials {
+public class AdditionalMaterial {
     private int id;
     public static int count;
 
-    public AdditionalMaterials() {
+    public AdditionalMaterial() {
         count++;
         id = count;
     }
