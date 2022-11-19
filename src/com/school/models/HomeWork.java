@@ -1,11 +1,11 @@
 package com.school.models;
 
 public class HomeWork {
-    private static int id;
+    private static int ID;
     public static int count;
 
     public HomeWork() {
         count++;
-        id = count;
+        ID = count;
     }
 }

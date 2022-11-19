@@ -5,11 +5,17 @@ public class Course {
     private Student student;
     private Lecture lecture;
 
-    private int id;
+    private int ID;
     public static int count;
+    private String name;
 
-    public Course() {
+    public Course(String courseName) {
         count++;
-        id = count;
+        ID = count;
+        this.name = courseName;
+    }
+
+    public int getID () {
+        return ID;
     }
 }

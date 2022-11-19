@@ -1,0 +1,36 @@
+[33mcommit 0a708346fa4f4b77931e61bf9c3168fecc7a78df[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Thu Nov 3 13:25:45 2022 +0200
+
+    fixed names of clases and objects in main branch
+
+[33mcommit 872528acddfd6198ebd80865a5871dd5578712bb[m[33m ([m[1;32mfeature[m[33m)[m
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Thu Nov 3 13:21:00 2022 +0200
+
+    fixed names of clases and objects in feature branch
+
+[33mcommit f4e6da8fb170a4495168d84469ddc3bb72a3ce30[m[33m ([m[1;31morigin/feature[m[33m)[m
+Merge: d31179f 481a612
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Thu Nov 3 13:01:10 2022 +0200
+
+    fixed merge feature in main
+
+[33mcommit d31179fca0e5631c82bf68741dfe819e5f675ba8[m
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Thu Nov 3 12:28:55 2022 +0200
+
+    add 2 new lectures in feature branch
+
+[33mcommit 481a61278ca0df7e403fd2492be7b6a1501fccf1[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Thu Nov 3 12:32:17 2022 +0200
+
+    add one new lecture in main branch
+
+[33mcommit 7c7807e915d1cfd825f55c60b7e42648a564e6f3[m
+Author: Artem_Akymenko <akimenko.artem@gmail.com>
+Date:   Wed Nov 2 13:04:17 2022 +0200
+
+    First commit
