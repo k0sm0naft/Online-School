@@ -1,11 +1,11 @@
 package com.school.models;
 
 public class AdditionalMaterial {
-    private int id;
+    private int ID;
     public static int count;
 
     public AdditionalMaterial() {
         count++;
-        id = count;
+        ID = count;
     }
 }
