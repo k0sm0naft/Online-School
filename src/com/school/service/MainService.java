@@ -8,8 +8,6 @@ public class MainService {
     private static int category;
     private static int branch;
 
-
-
     // Выбирает раздел
     public static void choiseOfCategory() {
         System.out.println("""
@@ -71,30 +69,33 @@ public class MainService {
 
     //Ошибочный ввод запускает выбор выйти или попробывать еще
     private static void ifWrongInput() {
-        System.out.println("""
-                Категорії не інує, спробуваті ще?
-                1 - Так
-                2 - Ні""");
-        int repeat = userInput.nextInt();
-        if (repeat == 1) {
+        int repeat;
+        do {
+            System.out.println("""
+                    Категорії не інує, спробуваті ще?
+                    1 - Так
+                    2 - Ні""");
+            repeat = userInput.nextInt();
+            if (repeat == 1) {
 //Возвращает в последнее меню выбора
-            switch (branch) {
-                case 1:
-                    choiseOfCategory();
-                    break;
-                case 2:
-                    resultOfChoise();
-                    break;
-                case 3:
-                    toCreateNewOne();
-                    break;
-                case 4:
-                    creation();
-                    break;
+                switch (branch) {
+                    case 1:
+                        choiseOfCategory();
+                        break;
+                    case 2:
+                        resultOfChoise();
+                        break;
+                    case 3:
+                        toCreateNewOne();
+                        break;
+                    case 4:
+                        creation();
+                        break;
+                }
             }
-        } else if (repeat == 2) {
-            System.out.println("Ви закінчили роботу в программі");
-        } else {ifWrongInput();}
+        }
+        while (repeat != 1 & repeat != 2);
+        System.out.println("Ви закінчили роботу в программі");
     }
 
     private static void creation() {
@@ -127,10 +128,16 @@ public class MainService {
                     int saveName = userInput.nextInt();
                     if (saveName == 1){
                         new Lecture(name, ID);
-                        System.out.println("Створена нова лекція '"+ name + "' в курсі з ID #" + ID);
+                        System.out.println("Створена нова лекція '"+ name + "' в курсі з ID #" + ID + "\n");
                     }
                 }
-                System.out.println("Створено лекцій: " + Lecture.count);
+                System.out.println("Створено лекцій: " + Lecture.count + "\n");
+                if (Lecture.count > 7){
+                    System.out.println("""                            
+                            Створена максимальна кількість лекцій
+                            Программа завершена""");
+                    break;
+                }
                 System.out.println("""
                         Створити нову?
                         1 - Так
