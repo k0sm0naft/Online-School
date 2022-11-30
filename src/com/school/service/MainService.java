@@ -1,6 +1,7 @@
 package com.school.service;
 
 import com.school.models.*;
+
 import java.util.Scanner;
 
 public class MainService {
@@ -8,7 +9,7 @@ public class MainService {
     private static int category;
     private static int branch;
 
-    // Выбирает раздел
+    /**Choise of maine category*/
     public static void choiseOfCategory() {
         System.out.println("""
                 Вкажуть номер категорії:
@@ -21,7 +22,7 @@ public class MainService {
         resultOfChoise();
     }
 
-    //Выбор: создавать или отрыть существующий обьект
+    /**Lanch choise to create or open existed object*/
     private static void toCreateNewOne() {
         branch = 3;
         System.out.println("""
@@ -29,16 +30,12 @@ public class MainService {
                 1 - Створити новий об'єкт категорії.
                 2 - Відкрити існуючий об'єкт категорії.""");
         int toCreate = userInput.nextInt();
-        if (toCreate == 1) {
-            creation();
-        } else if (toCreate == 2) {
-            //openObject()
-        } else {
-            ifWrongInput();
-        }
+        if (toCreate == 1) creation();
+        else if (toCreate == 2) openObject();
+        else ifWrongInput();
     }
 
-    //Показівает категорию вібора и направляет на следующую ветку
+    /**Show category of choise and directs to the next branch*/
     private static void resultOfChoise() {
         branch = 2;
         switch (category) {
@@ -67,7 +64,7 @@ public class MainService {
 
     }
 
-    //Ошибочный ввод запускает выбор выйти или попробывать еще
+    /**Incorrect input triggers the choice to quit or try again*/
     private static void ifWrongInput() {
         int repeat;
         do {
@@ -77,8 +74,7 @@ public class MainService {
                     2 - Ні""");
             repeat = userInput.nextInt();
             if (repeat == 1) {
-//Возвращает в последнее меню выбора
-                switch (branch) {
+                switch (branch) {//Back to last menu
                     case 1:
                         choiseOfCategory();
                         break;
@@ -97,42 +93,42 @@ public class MainService {
         while (repeat != 1 & repeat != 2);
         System.out.println("Ви закінчили роботу в программі");
     }
-
+/**Create a new object of category*/
     private static void creation() {
         branch = 4;
         switch (category) {
-            case 1://Создать обьект Курси
+            case 1://Create object Course
                 System.out.println(111);
                 break;
-            case 2://Создать обьект Вчителі
+            case 2://Create object Teacher
                 System.out.println(222);
                 break;
-            case 3://Создать обьект Студенті
+            case 3://Create object Student
                 System.out.println(333);
                 break;
-            case 4://Создать обьект Лекції
+            case 4://Create object Lecture
                 System.out.println("Введіть ID курсу до якого відноситься нова лекція");
                 int ID = userInput.nextInt();
-                System.out.println("ID курсу: #" + ID +"?");
+                System.out.println("ID курсу: #" + ID + "?");
                 System.out.println("""
                         1 - Так
                         2 - Ні""");
                 int saveID = userInput.nextInt();
-                if (saveID == 1){
+                if (saveID == 1) {
                     System.out.println("Введіть назву нової лекції");
                     String name = userInput.next();
-                    System.out.println("Зберегти назву: '" + name +"'?");
+                    System.out.println("Зберегти назву: '" + name + "'?");
                     System.out.println("""
-                        1 - Так
-                        2 - Ні""");
+                            1 - Так
+                            2 - Ні""");
                     int saveName = userInput.nextInt();
-                    if (saveName == 1){
+                    if (saveName == 1) {
                         new Lecture(name, ID);
-                        System.out.println("Створена нова лекція '"+ name + "' в курсі з ID #" + ID + "\n");
+                        System.out.println("Створена нова лекція '" + name + "' в курсі з ID #" + ID + "\n");
                     }
                 }
                 System.out.println("Створено лекцій: " + Lecture.count + "\n");
-                if (Lecture.count > 7){
+                if (Lecture.count > 7) {
                     System.out.println("""                            
                             Створена максимальна кількість лекцій
                             Программа завершена""");
@@ -143,12 +139,14 @@ public class MainService {
                         1 - Так
                         2 - Повернутісь до вібору категорії""");
                 int createOneMore = userInput.nextInt();
-                if (createOneMore == 1){
-                    creation();
-                }else {choiseOfCategory();}
+                if (createOneMore == 1) creation();
+                else choiseOfCategory();
                 break;
             default:
                 ifWrongInput();
         }
+    }
+
+    private static void openObject() {
     }
 }
