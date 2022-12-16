@@ -14,4 +14,9 @@ public class Lecture {
         this.name = lectureName;
         this.courseID = courseID;
     }
+
+    @Override
+    public String toString() {
+        return "\n" + "\n" + "ID: " + ID + "\n    " + "Назва лекції: " + name + "\n    " + "ID курсу: " + courseID;
+    }
 }

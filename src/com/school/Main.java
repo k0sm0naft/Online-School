@@ -1,20 +1,24 @@
 package com.school;
 
 import com.school.models.*;
+import com.school.repository.LectureRepository;
 import com.school.service.MainService;
 
+import java.util.Arrays;
+
 public class Main {
+    public static Course firstCourse;
 
     public static void main(String[] args) {
-
-        Course firstCourse = new Course("Математичні дії");
-        Lecture firstLecture = new Lecture("Додавання", firstCourse.ID);
-        Lecture secondLecture = new Lecture("Віднімання", firstCourse.ID);
-        Lecture thirdLecture = new Lecture("Ділення", firstCourse.ID);
-        Lecture forthLecture = new Lecture("Множення", firstCourse.ID);
-        Lecture fifthLecture = new Lecture("Відсотки", firstCourse.ID);
-        Lecture sixthLecture = new Lecture("Корені", firstCourse.ID);
-
+        new LectureRepository();
+        initData();
         MainService.choiseOfCategory();
+    }
+
+    public static void initData() {
+        firstCourse = new Course("Математичні дії");
+        LectureRepository.add(new Lecture("Додавання", firstCourse.ID));
+        LectureRepository.add(new Lecture("Віднімання", firstCourse.ID));
+        LectureRepository.add(new Lecture("Ділення", firstCourse.ID));
     }
 }
