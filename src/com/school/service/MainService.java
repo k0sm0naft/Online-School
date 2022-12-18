@@ -16,7 +16,7 @@ public class MainService extends Main {
      */
     public static void choiseOfCategory() {
         System.out.println("""
-                Вкажуть номер категорії:
+                Вкажіть номер категорії:
                 1 - Курси
                 2 - Вчителі
                 3 - Студенти
@@ -145,12 +145,12 @@ public class MainService extends Main {
                         2 - Ні""");
                 int saveName = userInput.nextInt();
                 if (saveName == 1) {
-                    LectureRepository.add(new Lecture(name, Main.firstCourse.ID));
-                    System.out.println("Створена нова лекція '" + name + "' в курсі з ID #" + Main.firstCourse.ID + "\n");
-                    System.out.println("Створено лекцій: " + Lecture.count + "\n");
+                    LectureRepository.add(new Lecture(name, Main.firstCourse.getID()));
+                    System.out.println("Створена нова лекція '" + name + "' в курсі з ID #" + Main.firstCourse.getID() + "\n");
+                    System.out.println("Створено лекцій: " + Lecture.getCount() + "\n");
                 }
                 /*}*/
-                if (Lecture.count > 7) {
+                if (Lecture.getCount() > 7) {
                     System.out.println("""                            
                             Створена максимальна кількість лекцій
                             Программа завершена""");
@@ -185,7 +185,7 @@ public class MainService extends Main {
                 choiseOfCategory();
                 break;
             case 4://Create objects Lecture
-                System.out.println(LectureRepository.showCreatedLectures());
+                System.out.println(LectureRepository.showList(LectureRepository.getLecturesArr()));
                 choiseOfCategory();
                 break;
             default:

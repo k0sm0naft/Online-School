@@ -1,4 +1,4 @@
 package com.school.repository;
 
-public class AdditionalMaterialRepository {
+public class AdditionalMaterialRepository extends Repository {
 }

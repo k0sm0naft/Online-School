@@ -1,11 +1,8 @@
 package com.school.models;
 
-public class HomeWork {
-    private static int ID;
-    public static int count;
+public class HomeWork extends Lecture{
 
-    public HomeWork() {
-        count++;
-        ID = count;
+    public HomeWork(String name, long courseID) {
+        super(name, courseID);
     }
 }

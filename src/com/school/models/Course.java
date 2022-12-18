@@ -1,17 +1,22 @@
 package com.school.models;
 
-public class Course {
+public class Course extends Model {
     private Teacher teacher;
     private Student student;
     private Lecture lecture;
+    private static long count;
 
-    public int ID;
-    public static int count;
-    public String name;
-
-    public Course(String courseName) {
+    public Course(String name) {
+        super(name);
         count++;
-        ID = count;
-        this.name = courseName;
+        setID(count);
+    }
+
+    public static long getCount() {
+        return count;
+    }
+
+    public static void setCount(long count) {
+        Course.count = count;
     }
 }

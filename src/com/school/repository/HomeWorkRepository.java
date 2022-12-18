@@ -1,4 +1,4 @@
 package com.school.repository;
 
-public class HomeWorkRepository {
+public class HomeWorkRepository extends Repository{
 }

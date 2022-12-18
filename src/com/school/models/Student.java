@@ -1,11 +1,8 @@
 package com.school.models;
 
-public class Student {
-    private int ID;
-    public static int count;
+public class Student extends Course{
 
-    public Student() {
-        count++;
-        ID = count;
+    public Student(String name) {
+        super(name);
     }
 }

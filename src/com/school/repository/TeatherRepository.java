@@ -1,4 +1,4 @@
 package com.school.repository;
 
-public class TeatherRepository {
+public class TeatherRepository extends Repository{
 }

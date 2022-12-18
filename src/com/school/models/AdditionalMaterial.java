@@ -1,11 +1,8 @@
 package com.school.models;
 
-public class AdditionalMaterial {
-    private int ID;
-    public static int count;
+public class AdditionalMaterial extends Lecture{
 
-    public AdditionalMaterial() {
-        count++;
-        ID = count;
+    public AdditionalMaterial(String name, long courseID) {
+        super(name, courseID);
     }
 }
