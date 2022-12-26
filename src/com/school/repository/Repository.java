@@ -2,7 +2,7 @@ package com.school.repository;
 
 import com.school.models.Model;
 
-import java.util.Arrays;
+import static java.lang.System.arraycopy;
 
 public class Repository {
     private static Model[] repository;
@@ -12,59 +12,70 @@ public class Repository {
         this.repository = new Model[STANDARD_INIT_CAPACITY];
     }
 
-    public static Model[] getAl() {
+    public static Model[] getAll() {
         return repository;
     }
 
-    public static void add(Model model, Model[] repository) {
-        int emptySlot = 0;
-        for (int i = 0; i < repository.length; i++) {
-            if (repository[i] != null) continue;
-            emptySlot++;
+    /**
+     * Method to add new object in repository
+     */
+    public static void add(Model model) {
+        for (int i = 0; i <= repository.length; i++) {
+            if (i == repository.length) {
+                repository = increaseCapacity(repository);
+            }
+            if (repository[i] == null){
             repository[i] = model;
             break;
-        }
-        if (emptySlot == 0) {
-            int indexToAdd = repository.length;
-            repository = increaseCapacity(repository);
-            repository[indexToAdd] = model;
+            }
         }
     }
 
+    public static void add(Model model, Model[] repo) {
+        for (int i = 0; i < repo.length; i++) {
+            if (repo[i] != null) continue;
+            repo[i] = model;
+            break;
+        }
+    }
+
+
     /**
-     * Method to increase capacity of lecture array
+     * Method to increase capacity of array
      */
-    public static Model[] increaseCapacity(Model[] repository) {
-        int newCapacity = (repository.length * 3) / 2 + 1;
+    public static Model[] increaseCapacity(Model[] repo) {
+        int newCapacity = (repo.length * 3) / 2 + 1;
         Model[] tmpArr = new Model[newCapacity];
-        System.arraycopy(repository, 0, tmpArr, 0, repository.length);
-        return tmpArr;
+        arraycopy(repo, 0, tmpArr, 0, repo.length);
+        repo = tmpArr;
+        return repo;
     }
 
-    /**
-     * Return list of created lectures
-     */
-    public static String showList(Model[] repository) {
-        int capacityStringArr = 0;
-        for (int i = 0; i < repository.length; i++) {
-            if (repository[i] == null) continue;
-            capacityStringArr++;
-        }
-        String[] stringArr = new String[capacityStringArr];
+    public static void getById(long ID) {
         int i = 0;
         for (Model model : repository) {
-            if (model == null) continue;
-            stringArr[i] = model.toString();
             i++;
+            if (model == null)continue;
+            if (ID == model.getID()) {
+                System.out.println(model.toString());
+            }
         }
-        String obj = "об'єкти";
-        return repository.length + "Створені " + obj + ": " + Arrays.toString(stringArr) + "\n";
+        if (i == repository.length) System.out.println("Об'єкта з ID №" + ID + " не існує");
+
     }
 
-    public static void getById(int ID) {
-    }
-
-    public static void deleteById(int ID) {
+    public static void deleteById(long ID) {
+        for (int i = 0; i <= repository.length; i++) {
+            if (i == repository.length) {
+                System.out.println("ID не існує.");
+                break;
+            }
+            if (repository[i] == null)continue;
+            if (ID == repository[i].getID()) {
+                repository[i] = null;
+                break;
+            }
+        }
     }
 
     public int getSTANDARD_INIT_CAPACITY() {

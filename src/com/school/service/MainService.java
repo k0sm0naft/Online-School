@@ -1,15 +1,17 @@
 package com.school.service;
 
-import com.school.Main;
-import com.school.models.*;
 import com.school.repository.*;
 
 import java.util.Scanner;
 
-public class MainService extends Main {
+public class MainService {
     private static final Scanner userInput = new Scanner(System.in);
     private static int category;
     private static int branch;
+
+    private static void inDev() {
+        System.out.println("Розділ в розробці");
+    }
 
     /**
      * Choise of maine category
@@ -32,13 +34,54 @@ public class MainService extends Main {
     private static void toCreateOrOpen() {
         branch = 3;
         System.out.println("""
+                
                 Виберіть:
                 1 - Створити новий об'єкт категорії.
-                2 - Відкрити існуючі об'єкти категорії.""");
+                2 - Відкрити існуючі об'єкти категорії.
+                3 - Відкрити об'єкт категорії за ID.
+                4 - Видалити об'єкт категорії за ID.
+                5 - Повернутись до головного меню.""");
         int toCreate = userInput.nextInt();
-        if (toCreate == 1) creation();
-        else if (toCreate == 2) openObject();
-        else ifWrongInput();
+        switch (toCreate) {
+            case 1 -> creation();
+            case 2 -> openAllObject();
+            case 3 -> openObject();
+            case 4 -> deleteObject();
+            case 5 -> choiseOfCategory();
+            default -> ifWrongInput();
+        }
+    }
+
+    private static void deleteObject() {
+        System.out.println("Введіть ID об'єкта для видалення");
+        long delete = userInput.nextLong();
+        switch (category) {
+            case 1://delete object Course
+            case 3://delete object Student
+            case 2://delete object Teacher
+                inDev();
+                break;
+            case 4://delete object Lecture
+                LectureRepository.deleteById(delete);
+                break;
+        }
+        toCreateOrOpen();
+    }
+
+    private static void openObject() {
+        System.out.println("Введіть ID об'єкта:");
+        long open = userInput.nextLong();
+        switch (category) {
+            case 1://open object Course
+            case 3://open object Student
+            case 2://open object Teacher
+                inDev();
+                break;
+            case 4://Create object Lecture
+                LectureRepository.getById(open);
+                break;
+        }
+        toCreateOrOpen();
     }
 
     /**
@@ -49,29 +92,26 @@ public class MainService extends Main {
         switch (category) {
             case 1: //Курси
                 System.out.println("Ви вибрали 'курси'");
-                toCreateOrOpen();
                 break;
             case 2: //Вчителі
                 System.out.println("Ви вибрали 'вчителі'");
-                toCreateOrOpen();
                 break;
             case 3: //Студенти
                 System.out.println("Ви вибрали 'студенти'");
-                toCreateOrOpen();
                 break;
             case 4: //Лекції
                 System.out.println("Ви вибрали 'лекції'");
-                toCreateOrOpen();
                 break;
             case 5: //Вихід
                 userInput.close(); /**Где его лучше разместить?*/
                 System.out.println("Программа закрита");
+                System.exit(0);
                 break;
             default: //Error
                 branch = 1;
                 ifWrongInput();
         }
-
+        toCreateOrOpen();
     }
 
     /**
@@ -83,7 +123,7 @@ public class MainService extends Main {
             System.out.println("""
                     Категорії не інує, спробуваті ще?
                     1 - Так
-                    2 - Ні""");
+                    2 - Ні (Вихід)""");
             repeat = userInput.nextInt();
             if (repeat == 1) {
                 switch (branch) { //Back to last opened menu
@@ -100,7 +140,7 @@ public class MainService extends Main {
                         creation();
                         break;
                     case 5:
-                        openObject();
+                        openAllObject();
                         break;
                 }
             }
@@ -116,80 +156,33 @@ public class MainService extends Main {
         branch = 4;
         switch (category) {
             case 1://Create object Course
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
-                break;
-            case 2://Create object Teacher
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
-                break;
             case 3://Create object Student
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
+            case 2://Create object Teacher
+                inDev();
                 break;
             case 4://Create object Lecture
-                /*добавить выбор курса к которому добавляетсья лекция.
-                System.out.println("Введіть ID курсу до якого відноситься нова лекція");
-                int ID = userInput.nextInt();
-                System.out.println("ID курсу: #" + ID + "?");
-                System.out.println("""
-                        1 - Так
-                        2 - Ні""");
-                int saveID = userInput.nextInt();
-                if (saveID == 1) {*/
-                System.out.println("Введіть назву нової лекції");
-                String name = userInput.next();
-                System.out.println("Зберегти назву: '" + name + "'?");
-                System.out.println("""
-                        1 - Так
-                        2 - Ні""");
-                int saveName = userInput.nextInt();
-                if (saveName == 1) {
-                    LectureRepository.add(new Lecture(name, Main.firstCourse.getID()));
-                    System.out.println("Створена нова лекція '" + name + "' в курсі з ID #" + Main.firstCourse.getID() + "\n");
-                    System.out.println("Створено лекцій: " + Lecture.getCount() + "\n");
-                }
-                /*}*/
-                if (Lecture.getCount() > 7) {
-                    System.out.println("""                            
-                            Створена максимальна кількість лекцій
-                            Программа завершена""");
-                    break;
-                }
-                System.out.println("""
-                        Створити нову?
-                        1 - Так
-                        2 - Повернутісь до вібору категорії""");
-                int createOneMore = userInput.nextInt();
-                if (createOneMore == 1) creation();
-                else choiseOfCategory();
+                LectureService.lectureCreation();
                 break;
             default:
                 ifWrongInput();
         }
+        toCreateOrOpen();
     }
 
-    private static void openObject() {
+    private static void openAllObject() {
         branch = 5;
         switch (category) {
-            case 1://Open objects Course
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
+            case 1://Open all objects Course
+            case 2://Open all objects Teacher
+            case 3://Open all objects Student
+                inDev();
                 break;
-            case 2://Open objects Teacher
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
-                break;
-            case 3://Open objects Student
-                System.out.println("Розділ в розробці");
-                choiseOfCategory();
-                break;
-            case 4://Create objects Lecture
-                System.out.println(LectureRepository.showList(LectureRepository.getLecturesArr()));
-                choiseOfCategory();
+            case 4://Create all objects Lecture
+                System.out.println(LectureService.showList(LectureRepository.getRepository()));
                 break;
             default:
                 ifWrongInput();
         }
+        toCreateOrOpen();
     }
 }
