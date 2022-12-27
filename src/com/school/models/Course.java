@@ -9,7 +9,6 @@ public class Course extends Model {
     public Course(String name) {
         super(name);
         count++;
-        setID(count);
     }
 
     public static long getCount() {

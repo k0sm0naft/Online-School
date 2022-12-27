@@ -10,7 +10,7 @@ public class Lecture extends Course{
         super(name);
         this.courseID = courseID;
         count++;
-        setID(count);
+
     }
 
     public long getCourseID() {
@@ -18,13 +18,16 @@ public class Lecture extends Course{
     }
 
     public void setCourseID(long courseID) {
-        if (courseID > super.getCount()) {
+        if (courseID > Course.getCount()) {
             System.out.println("ID не існує!");
         } else this.courseID = courseID;
     }
     @Override
     public String toString() {
-        return super.toString() + "ID курсу: " + courseID;
+        return super.toString() + """
+                        
+                            ID курсу: %d
+                        """.formatted(courseID);
     }
 
     public static long getCount() {

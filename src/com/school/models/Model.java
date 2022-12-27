@@ -1,7 +1,7 @@
 package com.school.models;
 
 public class Model {
-    private long ID;
+    private final long ID;
     private static long count;
     private String name;
 
@@ -13,15 +13,13 @@ public class Model {
 
     @Override
     public String toString() {
-        return "\n" + "ID: " + ID + "\n    " + "Назва: " + name + "\n    ";
+        return  """
+                 ID: %d
+                     Назва: %s""".formatted(ID, name);
     }
 
     public long getID() {
         return ID;
-    }
-
-    public void setID(long ID) {
-        this.ID = ID;
     }
 
     public static long getCount() {

@@ -1,16 +1,13 @@
 package com.school.repository;
 
+import com.school.Main;
 import com.school.models.Model;
 
 import static java.lang.System.arraycopy;
 
 public class Repository {
-    private static Model[] repository;
-    private static final int STANDARD_INIT_CAPACITY = 5;
-
-    public Repository() {
-        this.repository = new Model[STANDARD_INIT_CAPACITY];
-    }
+    private static Model[] repository = new Model[getSTANDART_INIT_CAPACITY()];
+    private static final int STANDART_INIT_CAPACITY = 5;
 
     public static Model[] getAll() {
         return repository;
@@ -51,20 +48,21 @@ public class Repository {
         return repo;
     }
 
-    public static void getById(long ID) {
+    public static void getById(long ID, Model[] repository) {
         int i = 0;
         for (Model model : repository) {
             i++;
             if (model == null)continue;
             if (ID == model.getID()) {
-                System.out.println(model.toString());
+                System.out.println(model);
+                break;
             }
         }
         if (i == repository.length) System.out.println("Об'єкта з ID №" + ID + " не існує");
 
     }
 
-    public static void deleteById(long ID) {
+    public static void deleteById(long ID, Model[] repository) {
         for (int i = 0; i <= repository.length; i++) {
             if (i == repository.length) {
                 System.out.println("ID не існує.");
@@ -78,8 +76,8 @@ public class Repository {
         }
     }
 
-    public int getSTANDARD_INIT_CAPACITY() {
-        return STANDARD_INIT_CAPACITY;
+    public static int getSTANDART_INIT_CAPACITY() {
+        return STANDART_INIT_CAPACITY;
     }
 
     public static Model[] getRepository() {

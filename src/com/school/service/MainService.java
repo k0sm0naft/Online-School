@@ -1,7 +1,6 @@
 package com.school.service;
 
 import com.school.repository.*;
-
 import java.util.Scanner;
 
 public class MainService {
@@ -62,8 +61,10 @@ public class MainService {
                 inDev();
                 break;
             case 4://delete object Lecture
-                LectureRepository.deleteById(delete);
+                LectureRepository.deleteById(delete,LectureRepository.getRepository());
                 break;
+            default:
+                System.out.println("error");
         }
         toCreateOrOpen();
     }
@@ -78,8 +79,10 @@ public class MainService {
                 inDev();
                 break;
             case 4://Create object Lecture
-                LectureRepository.getById(open);
+                LectureRepository.getById(open, LectureRepository.getRepository());
                 break;
+            default:
+                System.out.println("error");
         }
         toCreateOrOpen();
     }
@@ -90,26 +93,19 @@ public class MainService {
     private static void resultOfChoise() {
         branch = 2;
         switch (category) {
-            case 1: //Курси
-                System.out.println("Ви вибрали 'курси'");
-                break;
-            case 2: //Вчителі
-                System.out.println("Ви вибрали 'вчителі'");
-                break;
-            case 3: //Студенти
-                System.out.println("Ви вибрали 'студенти'");
-                break;
-            case 4: //Лекції
-                System.out.println("Ви вибрали 'лекції'");
-                break;
-            case 5: //Вихід
+            case 1 -> System.out.println("Ви вибрали 'курси'");
+            case 2 -> System.out.println("Ви вибрали 'вчителі'");
+            case 3 -> System.out.println("Ви вибрали 'студенти'");
+            case 4 -> System.out.println("Ви вибрали 'лекції'");
+            case 5 -> {
                 userInput.close(); /**Где его лучше разместить?*/
                 System.out.println("Программа закрита");
                 System.exit(0);
-                break;
-            default: //Error
+            }
+            default -> {
                 branch = 1;
                 ifWrongInput();
+            }
         }
         toCreateOrOpen();
     }
@@ -127,21 +123,12 @@ public class MainService {
             repeat = userInput.nextInt();
             if (repeat == 1) {
                 switch (branch) { //Back to last opened menu
-                    case 1:
-                        choiseOfCategory();
-                        break;
-                    case 2:
-                        resultOfChoise();
-                        break;
-                    case 3:
-                        toCreateOrOpen();
-                        break;
-                    case 4:
-                        creation();
-                        break;
-                    case 5:
-                        openAllObject();
-                        break;
+                    case 1 -> choiseOfCategory();
+                    case 2 -> resultOfChoise();
+                    case 3 -> toCreateOrOpen();
+                    case 4 -> creation();
+                    case 5 -> openAllObject();
+                    default -> System.out.println("error");
                 }
             }
         }
@@ -177,8 +164,8 @@ public class MainService {
             case 3://Open all objects Student
                 inDev();
                 break;
-            case 4://Create all objects Lecture
-                System.out.println(LectureService.showList(LectureRepository.getRepository()));
+            case 4://Open all objects Lecture
+                LectureService.showList(LectureRepository.getRepository());
                 break;
             default:
                 ifWrongInput();
