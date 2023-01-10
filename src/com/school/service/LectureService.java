@@ -2,7 +2,6 @@ package com.school.service;
 
 import com.school.Main;
 import com.school.models.Lecture;
-import com.school.models.Model;
 import com.school.repository.LectureRepository;
 import java.util.Scanner;
 
@@ -29,18 +28,5 @@ public class LectureService {
             System.exit(0);
         }
 
-    }
-
-    /**
-     * Return list of created objects
-     */
-    public static void showList(Model[] repository) {
-        int count = 0;
-        for (Model lecture: repository) {
-            if(lecture == null)continue;
-            System.out.println(lecture);
-            count++;
-        }
-        System.out.println("~~~" + count + " створених лекцій~~~");
     }
 }

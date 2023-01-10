@@ -1,12 +1,18 @@
 package com.school.service;
 
+import com.school.models.Model;
+import com.school.models.Role;
 import com.school.repository.*;
+
 import java.util.Scanner;
 
 public class MainService {
     private static final Scanner userInput = new Scanner(System.in);
     private static int category;
     private static int branch;
+
+    private MainService() {
+    }
 
     private static void inDev() {
         System.out.println("Розділ в розробці");
@@ -33,13 +39,14 @@ public class MainService {
     private static void toCreateOrOpen() {
         branch = 3;
         System.out.println("""
-                
+                                
                 Виберіть:
                 1 - Створити новий об'єкт категорії.
                 2 - Відкрити існуючі об'єкти категорії.
                 3 - Відкрити об'єкт категорії за ID.
                 4 - Видалити об'єкт категорії за ID.
                 5 - Повернутись до головного меню.""");
+        if (category == 2) System.out.println("6 - Додати викладача до лекції");
         int toCreate = userInput.nextInt();
         switch (toCreate) {
             case 1 -> creation();
@@ -47,6 +54,10 @@ public class MainService {
             case 3 -> openObject();
             case 4 -> deleteObject();
             case 5 -> choiseOfCategory();
+            case 6 -> {
+                if (category == 2) PersonService.teacherToLecture();
+                else ifWrongInput();
+            }
             default -> ifWrongInput();
         }
     }
@@ -56,12 +67,16 @@ public class MainService {
         long delete = userInput.nextLong();
         switch (category) {
             case 1://delete object Course
-            case 3://delete object Student
-            case 2://delete object Teacher
                 inDev();
                 break;
+            case 2://delete object Teacher
+                PersonRepository.deleteById(delete,Role.TEACHER);
+                break;
+            case 3://delete object Student
+                PersonRepository.deleteById(delete,Role.STUDENT);
+                break;
             case 4://delete object Lecture
-                LectureRepository.deleteById(delete,LectureRepository.getRepository());
+                LectureRepository.deleteById(delete, LectureRepository.getRepository());
                 break;
             default:
                 System.out.println("error");
@@ -74,12 +89,17 @@ public class MainService {
         long open = userInput.nextLong();
         switch (category) {
             case 1://open object Course
-            case 3://open object Student
-            case 2://open object Teacher
                 inDev();
                 break;
-            case 4://Create object Lecture
+            case 2://open object Teacher
+                PersonRepository.getPersonById(open,Role.TEACHER);
+                break;
+            case 3://open object Student
+                PersonRepository.getPersonById(open,Role.STUDENT);
+                break;
+            case 4://open object Lecture
                 LectureRepository.getById(open, LectureRepository.getRepository());
+
                 break;
             default:
                 System.out.println("error");
@@ -132,7 +152,7 @@ public class MainService {
                 }
             }
         }
-        while (repeat != 1 & repeat != 2);
+        while (repeat != 1 && repeat != 2);
         System.out.println("Ви закінчили роботу в программі");
     }
 
@@ -143,9 +163,13 @@ public class MainService {
         branch = 4;
         switch (category) {
             case 1://Create object Course
-            case 3://Create object Student
-            case 2://Create object Teacher
                 inDev();
+                break;
+            case 2://Create object Teacher
+                PersonService.personCreation(Role.TEACHER);
+                break;
+            case 3://Create object Student
+                PersonService.personCreation(Role.STUDENT);
                 break;
             case 4://Create object Lecture
                 LectureService.lectureCreation();
@@ -161,15 +185,33 @@ public class MainService {
         switch (category) {
             case 1://Open all objects Course
             case 2://Open all objects Teacher
+                System.out.println("Викладачі");
+                showList(PersonRepository.getPersonByRole(Role.TEACHER));
+                break;
             case 3://Open all objects Student
-                inDev();
+                System.out.println("Студенти");
+                showList(PersonRepository.getPersonByRole(Role.STUDENT));
                 break;
             case 4://Open all objects Lecture
-                LectureService.showList(LectureRepository.getRepository());
+                System.out.println("Лекції");
+                showList(LectureRepository.getRepository());
                 break;
             default:
                 ifWrongInput();
         }
         toCreateOrOpen();
+    }
+
+    /**
+     * Return list of created objects
+     */
+    private static void showList(Model[] repository) {
+        int count = 0;
+        for (Model obj : repository) {
+            if (obj == null) continue;
+            System.out.println(obj);
+            count++;
+        }
+        System.out.println("~~~Створенио об'єктів: " + count + "~~~");
     }
 }

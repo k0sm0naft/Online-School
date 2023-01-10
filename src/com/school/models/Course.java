@@ -1,8 +1,7 @@
 package com.school.models;
 
 public class Course extends Model {
-    private Teacher teacher;
-    private Student student;
+    private Person person;
     private Lecture lecture;
     private static long count;
 
@@ -13,9 +12,5 @@ public class Course extends Model {
 
     public static long getCount() {
         return count;
-    }
-
-    public static void setCount(long count) {
-        Course.count = count;
     }
 }

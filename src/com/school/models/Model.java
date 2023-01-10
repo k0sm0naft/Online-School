@@ -26,10 +26,6 @@ public class Model {
         return count;
     }
 
-    public static void setCount(long count) {
-        Model.count = count;
-    }
-
     public String getName() {
         return name;
     }
@@ -37,4 +33,5 @@ public class Model {
     public void setName(String name) {
         this.name = name;
     }
+
 }

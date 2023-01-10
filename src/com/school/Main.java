@@ -1,32 +1,26 @@
 package com.school;
 
 import com.school.models.*;
-import com.school.repository.LectureRepository;
-import com.school.service.LectureService;
-import com.school.service.MainService;
+import static com.school.repository.LectureRepository.add;
+import static com.school.repository.PersonRepository.add;
+import static com.school.service.MainService.choiseOfCategory;
+
 public class Main {
     public static final Course firstCourse = new Course("Математичні дії");;
 
     public static void main(String[] args) {
-        new LectureRepository();
         initData();
-        MainService.choiseOfCategory();
-
-//          Закоментированы, нужны для отладки:
-        //System.out.println(Arrays.toString(Repository.getRepository()) + "\n" + "Размер массива: " + Repository.getRepository().length);
-        //LectureRepository.getById(11, LectureRepository.getRepository());
-        //LectureRepository.deleteById(1, LectureRepository.getRepository());
-        //LectureService.showList(LectureRepository.getRepository());
-        //System.out.println("\n" + "Размер массива лекций: " + LectureRepository.getRepository().length);
-        //System.out.println(firstCourse.toString());
+        choiseOfCategory();
     }
 
-    public static void initData() {
-        LectureRepository.add(new Lecture("Додавання", firstCourse.getID()));
-        LectureRepository.add(new Lecture("Віднімання", firstCourse.getID()));
-        LectureRepository.add(new Lecture("Ділення", firstCourse.getID()));
+    private static void initData() {
+        add(new Lecture("Додавання", firstCourse.getID(), 5));
+        add(new Lecture("Віднімання", firstCourse.getID()));
+        add(new Lecture("Ділення", firstCourse.getID()));
+        add(new Person("Some teacher", firstCourse.getID(), Role.TEACHER));
+        add(new Person("Second teacher", firstCourse.getID(), Role.STUDENT));
         for ( int i = 4; i <=10; i++){
-            LectureRepository.add(new Lecture("Лекція №"+i, 5));
+            add(new Lecture("Лекція №"+i, 1));
         }
     }
 }

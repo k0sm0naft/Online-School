@@ -4,7 +4,9 @@ import com.school.models.Lecture;
 import com.school.models.Model;
 
 public class LectureRepository extends Repository {
-    private static Model[] lecturesArr = new Model[getSTANDART_INIT_CAPACITY()];;
+    private static Model[] lecturesArr = new Model[getSTANDART_INIT_CAPACITY()];
+
+    private LectureRepository() {}
 
     /**
      * Add new lecture to repository
@@ -16,9 +18,8 @@ public class LectureRepository extends Repository {
         }
         add(lecture, lecturesArr);
     }
-
-    public static Model[] increaseCapacity() {
-        return lecturesArr = increaseCapacity(lecturesArr);
+    public static void increaseCapacity() {
+        lecturesArr = increaseCapacity(lecturesArr);
     }
 
     public static Model[] getRepository() {
